@@ -99,21 +99,26 @@ public class Clinica {
 	}
 	
 	//metodos para agregar
-	public void addDoctor (/*  Parametros */) {
+	public void addDoctor () {
 		Doctor d = new Doctor();
 		if (Doctores != null ) {
 			Doctores = new Doctor[1];
-		}else {
+			Doctores[0]=d;
+		}
+		else {
 			Doctores = Arrays.copyOf(Doctores, Doctores.length + 1);
-			Doctores [Doctores.length - 1 ]= d;
+			Doctores[Doctores.length - 1 ]= d;
 		}
 	}
 	
-	public void addPaciente  (/*  Parametros */) {
-		Paciente p = new Paciente() {};
-		if (Pacientes != null ) {
+	
+	public void addPaciente(){
+		Paciente p = new Paciente();
+		if (Pacientes == null ) {
 			Pacientes = new Paciente[1];
-		}else {
+			Pacientes[0]=p;
+		}
+		else {
 			Pacientes = Arrays.copyOf(Pacientes, Pacientes.length + 1);
 			Pacientes [Pacientes.length - 1 ]= p;
 		}
@@ -122,8 +127,9 @@ public class Clinica {
 		Sala s = new Cirujia(piso, numero, edificio, citaAsignada, pacientes, doctores, utencilios);
 		String t = "Cirujia";
 		if (t.compareTo(tipo) == 0) {
-			if (Salas != null ) {
+			if (Salas == null ) {
 				Salas = new Sala[1];
+				
 			}else {
 				Salas = Arrays.copyOf(Salas, Salas.length + 1);
 				Salas [Salas.length - 1 ]= s;
@@ -146,10 +152,61 @@ public class Clinica {
 		}
 		if (Salas != null ) {
 			Salas = new Sala[1];
+			Salas[0]=s;
 		}else {
 			Salas = Arrays.copyOf(Salas, Salas.length + 1);
 			Salas [Salas.length - 1 ]= s;
 		}
 	}
+	
+	public void addCita (String ccPaciente) {
+		
+		int numPaciente = SearchPacienteCC(ccPaciente);
+		Cita c = new Cita(Pacientes[numPaciente]);
+		Sintomas sintomas = Pacientes[numPaciente].getSintomas();
+		if(sintomas.getClass().getName().compareTo("Sint_Sicologico") ==0) {
+			
+			
+		}
+		if (Citas == null ) {
+			Citas = new Cita[1];
+			Citas[0]=c;
+		}else {
+			Citas = Arrays.copyOf(Citas, Citas.length + 1);
+			Citas [Citas.length - 1 ]= c;
+		}
+	}
+	
+	public int SearchPacienteCC(String cedula) {
+		int i = -1;
+		while(++i<Pacientes.length && Pacientes[i].getCedula().compareTo(cedula)!=0);
+		return (i<Pacientes.length)?i:-1;
+	} 
+	
+	public int SearchDoctorEspecialidad(String especialidad) {
+		int i = -1;
+		
+		Especialista[] especialistas = null ;
+		for(Doctor e: Doctores) {
+			i++;
+			if(e.getClass().getName()=="Especialisa") {	
+				if (especialistas == null ) {
+					especialistas = new Especialista[1];
+					especialistas[0] = (Especialista) Doctores[i];
+				
+				}
+				else 
+			{
+				especialistas = Arrays.copyOf(especialistas, especialistas.length + 1);
+				especialistas[especialistas.length - 1 ]= (Especialista) Doctores[i];
+			}
+			}
+		}
+		
+		int j = -1;
+		while(++j<especialistas.length && especialistas[j].getEspecialidad().compareTo(especialidad)!=0);
+		return (i<Pacientes.length)?i:-1;
+		}
+	} 
 
-}
+

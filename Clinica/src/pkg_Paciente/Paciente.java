@@ -2,8 +2,14 @@ package pkg_Paciente;
 
 import pkg_Paciente.Eps;
 
-public abstract class Paciente extends Persona {
-    private Eps eps;
+public class Paciente extends Persona {
+    @Override
+	public String getCedula() {
+		// TODO Auto-generated method stub
+		return super.getCedula();
+	}
+
+	private Eps eps;
     private String diagnostico;
     private double pulso;
     private double altura;
@@ -34,6 +40,43 @@ public abstract class Paciente extends Persona {
     public void setPeso(double peso) {
         this.peso = peso;
     }
+
+	public Eps getEps() {
+		return eps;
+	}
+
+	public void setEps(Eps eps) {
+		this.eps = eps;
+	}
+
+	public String getDiagnostico() {
+		return diagnostico;
+	}
+
+	public void setDiagnostico(String diagnostico) {
+		this.diagnostico = diagnostico;
+	}
+
+	public Sintomas getSintomas() {
+		return sintomas;
+	}
+
+	public void setSintomas(Sintomas sintomas) {
+		this.sintomas = sintomas;
+	}
+
+	public boolean isUrgente() {
+		return urgente;
+	}
+
+	public void setUrgente(boolean urgente) {
+		this.urgente = urgente;
+	}
+	
+	public Paciente() {
+		
+		
+	}
 
 
 }
