@@ -1,26 +1,27 @@
 package pkg_Paciente;
 
+import java.util.Arrays;
+
 public class Clinica {
 
 	private Doctor [] Doctores;
 	private Paciente [] Pacientes;
 	private Cita [] Citas;
 	private Sala [] Salas;
-	private double PrecioConsulta;
-	private Consultas [] Consutas;
+	private double PrecioSala;
 	private String Direccion, EPS;
 	private final String Nombre = "Idea";
-	private final String  Año_Fundacion =  "2019";
+	private final String  AÃ±o_Fundacion =  "2019";
 	private boolean Licencias;
 	
-	public Clinica(Doctor[] doctores, Paciente[] pacientes, Cita[] citas, Sala[] salas, double precioConsulta,
-			Consultas[] consutas, String direccion, String ePS, boolean licencias) {
+	public Clinica(Doctor[] doctores, Paciente[] pacientes, Cita[] citas, Sala[] salas, double precioSala,
+			String direccion, String ePS, boolean licencias) {
 		Doctores = doctores;
 		Pacientes = pacientes;
 		Citas = citas;
 		Salas = salas;
-		PrecioConsulta = precioConsulta;
-		Consutas = consutas;
+		PrecioSala = precioSala;
+		
 		Direccion = direccion;
 		EPS = ePS;
 		Licencias = licencias;
@@ -54,18 +55,18 @@ public class Clinica {
 		Salas = salas;
 	}
 	
-	public double getPrecioConsulta() {
-		return PrecioConsulta;
+	public double getPrecioSala() {
+		return PrecioSala;
 	}
-	public void setPrecioConsulta(double precioConsulta) {
-		PrecioConsulta = precioConsulta;
+	public void setPrecioSala(double precioSala) {
+		PrecioSala = precioSala;
 	}
 	
-	public Consultas[] getConsutas() {
-		return Consutas;
+	public Sala [] getConsutas() {
+		return Salas;
 	}
-	public void setConsutas(Consultas[] consutas) {
-		Consutas = consutas;
+	public void setConsutas(Sala [] consutas) {
+		Salas = consutas;
 	}
 	
 	public String getDireccion() {
@@ -93,10 +94,62 @@ public class Clinica {
 		return Nombre;
 	}
 	
-	public String getAño_Fundacion() {
-		return Año_Fundacion;
+	public String getAÃ±o_Fundacion() {
+		return AÃ±o_Fundacion;
 	}
 	
+	//metodos para agregar
+	public void addDoctor (/*  Parametros */) {
+		Doctor d = new Doctor();
+		if (Doctores != null ) {
+			Doctores = new Doctor[1];
+		}else {
+			Doctores = Arrays.copyOf(Doctores, Doctores.length + 1);
+			Doctores [Doctores.length - 1 ]= d;
+		}
+	}
 	
-	
+	public void addPaciente  (/*  Parametros */) {
+		Paciente p = new Paciente() {};
+		if (Pacientes != null ) {
+			Pacientes = new Paciente[1];
+		}else {
+			Pacientes = Arrays.copyOf(Pacientes, Pacientes.length + 1);
+			Pacientes [Pacientes.length - 1 ]= p;
+		}
+	}
+	public void addSalas  (String piso, String numero, String edificio, String tipo, Cita citaAsignada, Paciente pacientes, Doctor doctores, String [] utencilios) {
+		Sala s = new Cirujia(piso, numero, edificio, citaAsignada, pacientes, doctores, utencilios);
+		String t = "Cirujia";
+		if (t.compareTo(tipo) == 0) {
+			if (Salas != null ) {
+				Salas = new Sala[1];
+			}else {
+				Salas = Arrays.copyOf(Salas, Salas.length + 1);
+				Salas [Salas.length - 1 ]= s;
+			}
+		}
+		
+	}
+
+	public void addSalas  (String piso, String numero, String edificio, String tipo, Cita citaAsignada, Paciente pacientes, Doctor doctores) {
+		Sala s = null ;
+		switch (tipo) {
+		case "Laboratorio":
+			s = new Laboratorio(piso, numero, edificio, citaAsignada, pacientes, doctores);
+			break;
+		case "Cosultorio":
+			s = new Laboratorio(piso, numero, edificio, citaAsignada, pacientes, doctores);
+			break;
+		default:
+			break;
+		}
+		if (Salas != null ) {
+			Salas = new Sala[1];
+		}else {
+			Salas = Arrays.copyOf(Salas, Salas.length + 1);
+			Salas [Salas.length - 1 ]= s;
+		}
+	}
+
 }
