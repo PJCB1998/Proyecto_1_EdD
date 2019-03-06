@@ -3,9 +3,9 @@ package pkg_Paciente;
 public class Cirujia extends Sala {
 	private String [] Utencilios;
 	
-	public Cirujia(String piso, String numero, String edificio, String tipo, Cita citaAsignada, Paciente pacientes,
+	public Cirujia(String piso, String numero, String edificio, Cita citaAsignada, Paciente pacientes,
 			Doctor doctores, String [] utencilios) {
-		super(piso, numero, edificio, tipo, citaAsignada, pacientes, doctores);
+		super(piso, numero, edificio, "Cirujia", citaAsignada, pacientes, doctores);
 		// TODO Auto-generated constructor stub
 		Utencilios = utencilios;
 	}
