@@ -16,6 +16,14 @@ public class Especialista extends Doctor {
 	public void setCirugano(boolean isCirugano) {
 		this.isCirugano = isCirugano;
 	}
+	@Override
+	public String getCedula() {
+		// TODO Auto-generated method stub
+		return super.getCedula();
+	}
 	
-	
+	public Especialista() {
+		
+		
+	}
 }

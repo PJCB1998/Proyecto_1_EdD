@@ -13,7 +13,7 @@ public class Clinica {
 	private final String Nombre = "Idea";
 	private final String  Año_Fundacion =  "2019";
 	private boolean Licencias;
-	
+
 	public Clinica(Doctor[] doctores, Paciente[] pacientes, Cita[] citas, Sala[] salas, double precioSala,
 			String direccion, String ePS, boolean licencias) {
 		Doctores = doctores;
@@ -21,83 +21,83 @@ public class Clinica {
 		Citas = citas;
 		Salas = salas;
 		PrecioSala = precioSala;
-		
+
 		Direccion = direccion;
 		EPS = ePS;
 		Licencias = licencias;
 	}
-	
+
 	public Doctor[] getDoctores() {
 		return Doctores;
 	}
 	public void setDoctores(Doctor[] doctores) {
 		Doctores = doctores;
 	}
-	
+
 	public Paciente[] getPacientes() {
 		return Pacientes;
 	}
 	public void setPacientes(Paciente[] pacientes) {
 		Pacientes = pacientes;
 	}
-	
+
 	public Cita[] getCitas() {
 		return Citas;
 	}
 	public void setCitas(Cita[] citas) {
 		Citas = citas;
 	}
-	
+
 	public Sala[] getSalas() {
 		return Salas;
 	}
 	public void setSalas(Sala[] salas) {
 		Salas = salas;
 	}
-	
+
 	public double getPrecioSala() {
 		return PrecioSala;
 	}
 	public void setPrecioSala(double precioSala) {
 		PrecioSala = precioSala;
 	}
-	
+
 	public Sala [] getConsutas() {
 		return Salas;
 	}
 	public void setConsutas(Sala [] consutas) {
 		Salas = consutas;
 	}
-	
+
 	public String getDireccion() {
 		return Direccion;
 	}
 	public void setDireccion(String direccion) {
 		Direccion = direccion;
 	}
-	
+
 	public String getEPS() {
 		return EPS;
 	}
 	public void setEPS(String ePS) {
 		EPS = ePS;
 	}
-	
+
 	public boolean isLicencias() {
 		return Licencias;
 	}
 	public void setLicencias(boolean licencias) {
 		Licencias = licencias;
 	}
-	
+
 	public String getNombre() {
 		return Nombre;
 	}
-	
+
 	public String getAño_Fundacion() {
 		return Año_Fundacion;
 	}
-	
+
 	//metodos para agregar
 	public void addDoctor () {
 		Doctor d = new Doctor();
@@ -110,8 +110,8 @@ public class Clinica {
 			Doctores[Doctores.length - 1 ]= d;
 		}
 	}
-	
-	
+
+
 	public void addPaciente(){
 		Paciente p = new Paciente();
 		if (Pacientes == null ) {
@@ -129,13 +129,13 @@ public class Clinica {
 		if (t.compareTo(tipo) == 0) {
 			if (Salas == null ) {
 				Salas = new Sala[1];
-				
+
 			}else {
 				Salas = Arrays.copyOf(Salas, Salas.length + 1);
 				Salas [Salas.length - 1 ]= s;
 			}
 		}
-		
+
 	}
 
 	public void addSalas  (String piso, String numero, String edificio, String tipo, Cita citaAsignada, Paciente pacientes, Doctor doctores) {
@@ -158,16 +158,45 @@ public class Clinica {
 			Salas [Salas.length - 1 ]= s;
 		}
 	}
-	
+
 	public void addCita (String ccPaciente) {
-		
+
 		int numPaciente = SearchPacienteCC(ccPaciente);
+		int numDoctor;
 		Cita c = new Cita(Pacientes[numPaciente]);
 		Sintomas sintomas = Pacientes[numPaciente].getSintomas();
-		if(sintomas.getClass().getName().compareTo("Sint_Sicologico") ==0) {
-			
-			
+		if(sintomas.getClass().getName().compareTo("Sint_Sicologico") == 0) {
+			numDoctor = SearchDoctorEspecialidad("Psiquiatra");
+			c.setDoctor(Doctores[numDoctor]);
 		}
+
+		else {
+			if(((Sint_Fisico)sintomas).isDiarrea()){
+				numDoctor=SearchDoctorEspecialidad("Gastrointerologo");
+				c.setDoctor(Doctores[numDoctor]);
+			}
+			else {
+				if(((Sint_Fisico)sintomas).isDolor_muscular()) {
+
+					numDoctor= SearchDoctorEspecialidad("Reumatologo");
+					c.setDoctor(Doctores[numDoctor]);
+
+				}
+				else {
+
+					numDoctor= SearchDoctorGeneral();
+					c.setDoctor(Doctores[numDoctor]);
+
+				}
+
+			}
+
+
+
+		}
+
+
+
 		if (Citas == null ) {
 			Citas = new Cita[1];
 			Citas[0]=c;
@@ -176,37 +205,39 @@ public class Clinica {
 			Citas [Citas.length - 1 ]= c;
 		}
 	}
-	
+
 	public int SearchPacienteCC(String cedula) {
 		int i = -1;
 		while(++i<Pacientes.length && Pacientes[i].getCedula().compareTo(cedula)!=0);
 		return (i<Pacientes.length)?i:-1;
 	} 
-	
+
 	public int SearchDoctorEspecialidad(String especialidad) {
 		int i = -1;
-		
-		Especialista[] especialistas = null ;
-		for(Doctor e: Doctores) {
+		for(Doctor e: Doctores ) {
 			i++;
-			if(e.getClass().getName()=="Especialisa") {	
-				if (especialistas == null ) {
-					especialistas = new Especialista[1];
-					especialistas[0] = (Especialista) Doctores[i];
-				
-				}
-				else 
-			{
-				especialistas = Arrays.copyOf(especialistas, especialistas.length + 1);
-				especialistas[especialistas.length - 1 ]= (Especialista) Doctores[i];
+			if(e instanceof Especialista) {	
+				String esp = ((Especialista) e).getEspecialidad();
+				if(esp.compareTo(especialidad)==0) {
+					return i;
+				}	
 			}
+
+		}
+		return -1;
+	}
+
+	public int SearchDoctorGeneral() {
+		int i = -1;
+		for(Doctor e: Doctores ) {
+			i++;
+			if(!(e instanceof Especialista)) {	
+				return i;
 			}
-		}
-		
-		int j = -1;
-		while(++j<especialistas.length && especialistas[j].getEspecialidad().compareTo(especialidad)!=0);
-		return (i<Pacientes.length)?i:-1;
-		}
-	} 
+
+		} 
+		return -1;		
+	}
+}
 
 
