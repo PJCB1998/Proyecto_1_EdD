@@ -150,7 +150,7 @@ public class Clinica {
 		default:
 			break;
 		}
-		if (Salas != null ) {
+		if (Salas == null ) {
 			Salas = new Sala[1];
 			Salas[0]=s;
 		}else {
