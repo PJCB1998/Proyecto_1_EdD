@@ -101,7 +101,7 @@ public class Clinica {
 	//metodos para agregar
 	public void addDoctor () {
 		Doctor d = new Doctor();
-		if (Doctores != null ) {
+		if (Doctores == null ) {
 			Doctores = new Doctor[1];
 			Doctores[0]=d;
 		}
