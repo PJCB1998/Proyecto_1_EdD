@@ -8,17 +8,13 @@ public class Clinica {
 	private Paciente [] Pacientes;
 	private Cita [] Citas;
 	private Sala [] Salas;
-	private String Direccion, EPS;
+	private String Direccion;
 	private final String Nombre;
-	//cambio de la palabra "Año" por "anio", ya que eclipse la reconoce como un error
-	private final String  anio_Fundacion;
-	private boolean Licencias;
+	private boolean Licencias_v;
 
-	public Clinica(String direccion, String ePS, boolean licencias) {
+	public Clinica(String direccion, boolean licencias) {
 		Direccion = direccion;
-		EPS = ePS;
-		Licencias = licencias;
-		anio_Fundacion="2019";
+		Licencias_v = licencias;
 		Nombre="Clinica EIA";
 	}
 

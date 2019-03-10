@@ -1,20 +1,21 @@
 package pkg_Paciente;
 
+import java.util.Arrays;
+
 public class Doctor extends Persona {
-	private String[] horario = new String[0];
+	private Turno[] turnos = new Turno[0];
+	private String especialidad;
 	
-     public Doctor(String nombre, String cedula, int edad,String [] horario) {
+     public Doctor(String nombre, String cedula, int edad, String especialidad) {
 		super(nombre, cedula, edad);
-		this.horario =horario;
-		// TODO Auto-generated constructor stub
+		this.especialidad=especialidad;
+	}
+	private void agregar_turno(String hora){
+     	turnos= Arrays.copyOf(turnos,turnos.length+1);
+     	turnos[turnos.length-1].setHora(hora);
 	}
 
-	public String[] getHorario() {
-		return horario;
+	public String getEspecialidad() {
+		return especialidad;
 	}
-
-	public void setHorario(String[] horario) {
-		this.horario = horario;
-	}
- 
 }
