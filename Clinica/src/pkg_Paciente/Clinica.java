@@ -34,14 +34,12 @@ public class Clinica {
 	public void setDoctores(Doctor[] doctores) {
 		Doctores = doctores;
 	}
-
 	public Paciente[] getPacientes() {
 		return Pacientes;
 	}
 	public void setPacientes(Paciente[] pacientes) {
 		Pacientes = pacientes;
 	}
-
 	public Cita[] getCitas() {
 		return Citas;
 	}
@@ -191,15 +189,8 @@ public class Clinica {
 					c.setDoctor(Doctores[numDoctor]);
 
 				}
-
 			}
-
-
-
 		}
-
-
-
 		if (Citas == null ) {
 			Citas = new Cita[1];
 			Citas[0]=c;
