@@ -8,96 +8,20 @@ public class Clinica {
 	private Paciente [] Pacientes;
 	private Cita [] Citas;
 	private Sala [] Salas;
-	private double PrecioSala;
 	private String Direccion, EPS;
-	private final String Nombre = "Idea";
+	private final String Nombre;
 	//cambio de la palabra "Año" por "anio", ya que eclipse la reconoce como un error
-	private final String  anio_Fundacion =  "2019";
+	private final String  anio_Fundacion;
 	private boolean Licencias;
 
-	public Clinica(Doctor[] doctores, Paciente[] pacientes, Cita[] citas, Sala[] salas, double precioSala,
-			String direccion, String ePS, boolean licencias) {
-		Doctores = doctores;
-		Pacientes = pacientes;
-		Citas = citas;
-		Salas = salas;
-		PrecioSala = precioSala;
-
+	public Clinica(String direccion, String ePS, boolean licencias) {
 		Direccion = direccion;
 		EPS = ePS;
 		Licencias = licencias;
+		anio_Fundacion="2019";
+		Nombre="Clinica EIA";
 	}
 
-	public Doctor[] getDoctores() {
-		return Doctores;
-	}
-	public void setDoctores(Doctor[] doctores) {
-		Doctores = doctores;
-	}
-	public Paciente[] getPacientes() {
-		return Pacientes;
-	}
-	public void setPacientes(Paciente[] pacientes) {
-		Pacientes = pacientes;
-	}
-	public Cita[] getCitas() {
-		return Citas;
-	}
-	public void setCitas(Cita[] citas) {
-		Citas = citas;
-	}
-
-	public Sala[] getSalas() {
-		return Salas;
-	}
-	public void setSalas(Sala[] salas) {
-		Salas = salas;
-	}
-
-	public double getPrecioSala() {
-		return PrecioSala;
-	}
-	public void setPrecioSala(double precioSala) {
-		PrecioSala = precioSala;
-	}
-
-	public Sala [] getConsutas() {
-		return Salas;
-	}
-	public void setConsutas(Sala [] consutas) {
-		Salas = consutas;
-	}
-
-	public String getDireccion() {
-		return Direccion;
-	}
-	public void setDireccion(String direccion) {
-		Direccion = direccion;
-	}
-
-	public String getEPS() {
-		return EPS;
-	}
-	public void setEPS(String ePS) {
-		EPS = ePS;
-	}
-
-	public boolean isLicencias() {
-		return Licencias;
-	}
-	public void setLicencias(boolean licencias) {
-		Licencias = licencias;
-	}
-
-	public String getNombre() {
-		return Nombre;
-	}
-	
-	public String getAnio_Fundacion() {
-		return anio_Fundacion;
-	}
-
-	//metodos para agregar
 	public void addDoctor (String nombre, String cedula, int edad,String [] horario) {
 		Doctor d = new Doctor(nombre, cedula, edad, horario);
 		if (Doctores == null ) {
@@ -110,9 +34,7 @@ public class Clinica {
 		}
 	}
 
-
-	public void addPaciente(String nombre, String cedula, int edad, Eps eps, String diagnostico, double pulso, double altura,
-			double peso, Sintomas sintomas, boolean urgente){
+	public void addPaciente(String nombre, String cedula, int edad, Eps eps, String diagnostico, double pulso, double altura, double peso, Sintomas sintomas, boolean urgente){
 		Paciente p = new Paciente(nombre, cedula, edad, eps, diagnostico, pulso, altura, peso, sintomas, urgente);
 		if (Pacientes == null ) {
 			Pacientes = new Paciente[1];
@@ -123,9 +45,9 @@ public class Clinica {
 			Pacientes [Pacientes.length - 1 ]= p;
 		}
 	}
-	public void addSalas  (String piso, String numero, String edificio, String tipo, Cita citaAsignada, Paciente pacientes,
-			Doctor doctores, String [] utencilios) {
-		Sala s = new Cirujia(piso, numero, edificio, citaAsignada, pacientes, doctores, utencilios);
+	public void addCirugia  (String piso, String numero, String edificio, String tipo, Cita citaAsignada, Paciente pacientes,
+			Doctor doctores, String [] utencilios, double precio) {
+		Sala s = new Cirugia(piso, numero,  edificio,  citaAsignada, pacientes,  doctores,  precio, utencilios);
 		String t = "Cirujia";
 		if (t.compareTo(tipo) == 0) {
 			if (Salas == null ) {
@@ -148,6 +70,7 @@ public class Clinica {
 		case "Cosultorio":
 			s = new Laboratorio(piso, numero, edificio, citaAsignada, pacientes, doctores);
 			break;
+
 		default:
 			break;
 		}

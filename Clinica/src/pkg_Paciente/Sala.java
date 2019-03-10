@@ -2,52 +2,25 @@ package pkg_Paciente;
 
 public abstract class Sala {
 
-	protected String Piso, Numero, Edificio, Tipo;
+	protected String Piso, Numero, Edificio;
 	protected Cita citaAsignada;
 	protected Paciente Pacientes;
 	protected Doctor Doctores;
+	protected double precio;
 	
-	public Sala(String piso, String numero, String edificio, String tipo, Cita citaAsignada, Paciente pacientes,
-			Doctor doctores) {
+	public Sala(String piso, String numero, String edificio, Cita citaAsignada, Paciente pacientes,
+			Doctor doctores, double precio) {
 		Piso = piso;
 		Numero = numero;
 		Edificio = edificio;
-		Tipo = tipo;
 		this.citaAsignada = citaAsignada;
 		Pacientes = pacientes;
 		Doctores = doctores;
+		this.precio=precio;
 	}
 	
 	public abstract Paciente asignarPaciente();
 	public abstract Doctor asignarDoctor();
-	
-	public String getPiso() {
-		return Piso;
-	}
-	public void setPiso(String piso) {
-		Piso = piso;
-	}
-	
-	public String getNumero() {
-		return Numero;
-	}
-	public void setNumero(String numero) {
-		Numero = numero;
-	}
-	
-	public String getEdificio() {
-		return Edificio;
-	}
-	public void setEdificio(String edificio) {
-		Edificio = edificio;
-	}
-	
-	public String getTipo() {
-		return Tipo;
-	}
-	public void setTipo(String tipo) {
-		Tipo = tipo;
-	}
 	
 	public Cita getCitaAsignada() {
 		return citaAsignada;
@@ -69,6 +42,12 @@ public abstract class Sala {
 	public void setDoctores(Doctor doctores) {
 		Doctores = doctores;
 	}
-	
-	
+
+	public double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
 }

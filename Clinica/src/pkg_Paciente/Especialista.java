@@ -4,6 +4,11 @@ public class Especialista extends Doctor {
 
 	private String Especialidad;
 	private boolean isCirugano;
+
+	public Especialista(String nombre, String cedula, int edad, String[] horario) {
+		super(nombre, cedula, edad, horario);
+	}
+
 	public String getEspecialidad() {
 		return Especialidad;
 	}
@@ -15,15 +20,5 @@ public class Especialista extends Doctor {
 	}
 	public void setCirugano(boolean isCirugano) {
 		this.isCirugano = isCirugano;
-	}
-	@Override
-	public String getCedula() {
-		// TODO Auto-generated method stub
-		return super.getCedula();
-	}
-	
-	public Especialista() {
-		
-		
 	}
 }

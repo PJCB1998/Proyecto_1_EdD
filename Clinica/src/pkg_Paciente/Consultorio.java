@@ -2,10 +2,8 @@ package pkg_Paciente;
 
 public class Consultorio extends Sala{
 
-	public Consultorio(String piso, String numero, String edificio, Cita citaAsignada, Paciente pacientes,
-			Doctor doctores) {
-		super(piso, numero, edificio, "Consultorio", citaAsignada, pacientes, doctores);
-		// TODO Auto-generated constructor stub
+	public Consultorio(String piso, String numero, String edificio, Cita citaAsignada, Paciente pacientes, Doctor doctores) {
+		super(piso, numero, edificio, citaAsignada, pacientes, doctores,50000);
 	}
 
 	@Override
