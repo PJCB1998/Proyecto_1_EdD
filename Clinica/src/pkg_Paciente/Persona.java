@@ -4,7 +4,26 @@ public abstract class Persona {
     private String nombre;
     private String cedula;
     private int edad;
-    public String getCedula() {
+    
+    public Persona(String nombre, String cedula, int edad) {
+		super();
+		this.nombre = nombre;
+		this.cedula = cedula;
+		this.edad = edad;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public int getEdad() {
+		return edad;
+	}
+	public void setEdad(int edad) {
+		this.edad = edad;
+	}
+	public String getCedula() {
         return cedula;
     }
     

@@ -11,7 +11,8 @@ public class Clinica {
 	private double PrecioSala;
 	private String Direccion, EPS;
 	private final String Nombre = "Idea";
-	private final String  Año_Fundacion =  "2019";
+	//cambio de la palabra "Año" por "anio", ya que eclipse la reconoce como un error
+	private final String  anio_Fundacion =  "2019";
 	private boolean Licencias;
 
 	public Clinica(Doctor[] doctores, Paciente[] pacientes, Cita[] citas, Sala[] salas, double precioSala,
@@ -93,14 +94,14 @@ public class Clinica {
 	public String getNombre() {
 		return Nombre;
 	}
-
-	public String getAño_Fundacion() {
-		return Año_Fundacion;
+	
+	public String getAnio_Fundacion() {
+		return anio_Fundacion;
 	}
 
 	//metodos para agregar
-	public void addDoctor () {
-		Doctor d = new Doctor();
+	public void addDoctor (String nombre, String cedula, int edad,String [] horario) {
+		Doctor d = new Doctor(nombre, cedula, edad, horario);
 		if (Doctores == null ) {
 			Doctores = new Doctor[1];
 			Doctores[0]=d;
@@ -112,8 +113,9 @@ public class Clinica {
 	}
 
 
-	public void addPaciente(){
-		Paciente p = new Paciente();
+	public void addPaciente(String nombre, String cedula, int edad, Eps eps, String diagnostico, double pulso, double altura,
+			double peso, Sintomas sintomas, boolean urgente){
+		Paciente p = new Paciente(nombre, cedula, edad, eps, diagnostico, pulso, altura, peso, sintomas, urgente);
 		if (Pacientes == null ) {
 			Pacientes = new Paciente[1];
 			Pacientes[0]=p;
@@ -123,7 +125,8 @@ public class Clinica {
 			Pacientes [Pacientes.length - 1 ]= p;
 		}
 	}
-	public void addSalas  (String piso, String numero, String edificio, String tipo, Cita citaAsignada, Paciente pacientes, Doctor doctores, String [] utencilios) {
+	public void addSalas  (String piso, String numero, String edificio, String tipo, Cita citaAsignada, Paciente pacientes,
+			Doctor doctores, String [] utencilios) {
 		Sala s = new Cirujia(piso, numero, edificio, citaAsignada, pacientes, doctores, utencilios);
 		String t = "Cirujia";
 		if (t.compareTo(tipo) == 0) {
