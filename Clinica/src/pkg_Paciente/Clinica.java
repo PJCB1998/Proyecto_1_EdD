@@ -26,24 +26,24 @@ public class Clinica {
 		Doctor d = new Doctor(nombre, cedula, edad, horario);
 		if (Doctores == null ) {
 			Doctores = new Doctor[1];
-			Doctores[0]=d;
+			//Doctores[0]=d;
 		}
 		else {
 			Doctores = Arrays.copyOf(Doctores, Doctores.length + 1);
-			Doctores[Doctores.length - 1 ]= d;
 		}
+		Doctores[Doctores.length - 1 ]= d;
 	}
 
 	public void addPaciente(String nombre, String cedula, int edad, Eps eps, String diagnostico, double pulso, double altura, double peso, Sintomas sintomas, boolean urgente){
 		Paciente p = new Paciente(nombre, cedula, edad, eps, diagnostico, pulso, altura, peso, sintomas, urgente);
 		if (Pacientes == null ) {
 			Pacientes = new Paciente[1];
-			Pacientes[0]=p;
+			//	Pacientes[0]=p;
 		}
 		else {
 			Pacientes = Arrays.copyOf(Pacientes, Pacientes.length + 1);
-			Pacientes [Pacientes.length - 1 ]= p;
 		}
+		Pacientes [Pacientes.length - 1 ]= p;
 	}
 	public void addCirugia  (String piso, String numero, String edificio, String tipo, Cita citaAsignada, Paciente pacientes,
 			Doctor doctores, String [] utencilios, double precio) {
@@ -55,8 +55,8 @@ public class Clinica {
 
 			}else {
 				Salas = Arrays.copyOf(Salas, Salas.length + 1);
-				Salas [Salas.length - 1 ]= s;
 			}
+			Salas [Salas.length - 1 ]= s;
 		}
 
 	}
@@ -76,11 +76,11 @@ public class Clinica {
 		}
 		if (Salas == null ) {
 			Salas = new Sala[1];
-			Salas[0]=s;
+			//Salas[0]=s;
 		}else {
 			Salas = Arrays.copyOf(Salas, Salas.length + 1);
-			Salas [Salas.length - 1 ]= s;
 		}
+		Salas [Salas.length - 1 ]= s;
 	}
 
 	public void addCita (String ccPaciente) {
