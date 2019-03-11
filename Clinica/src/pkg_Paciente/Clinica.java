@@ -18,8 +18,8 @@ public class Clinica {
 		Nombre="Clinica EIA";
 	}
 
-	public void addDoctor (String nombre, String cedula, int edad,String [] horario) {
-		Doctor d = new Doctor(nombre, cedula, edad, horario);
+	public void addDoctor (String nombre, String cedula, int edad,String [] horario, String es) {
+		Doctor d = new Doctor(nombre, cedula, edad, horario, es);
 		if (Doctores == null ) {
 			Doctores = new Doctor[1];
 			//Doctores[0]=d;
@@ -30,8 +30,8 @@ public class Clinica {
 		Doctores[Doctores.length - 1 ]= d;
 	}
 
-	public void addPaciente(String nombre, String cedula, int edad, Eps eps, String diagnostico, double pulso, double altura, double peso, Sintomas sintomas, boolean urgente){
-		Paciente p = new Paciente(nombre, cedula, edad, eps, diagnostico, pulso, altura, peso, sintomas, urgente);
+	public void addPaciente(String nombre, String cedula, int edad, String diagnostico, double pulso, double altura, double peso, Sintomas sintomas, boolean urgente){
+		Paciente p = new Paciente(nombre, cedula, edad);
 		if (Pacientes == null ) {
 			Pacientes = new Paciente[1];
 			//	Pacientes[0]=p;
@@ -43,7 +43,7 @@ public class Clinica {
 	}
 	public void addCirugia  (String piso, String numero, String edificio, String tipo, Cita citaAsignada, Paciente pacientes,
 			Doctor doctores, String [] utencilios, double precio) {
-		Sala s = new Cirugia(piso, numero,  edificio,  citaAsignada, pacientes,  doctores,  precio, utencilios);
+		Sala s = new Urgencias(piso, numero,  edificio);
 		String t = "Cirujia";
 		if (t.compareTo(tipo) == 0) {
 			if (Salas == null ) {
@@ -83,7 +83,7 @@ public class Clinica {
 
 		int numPaciente = SearchPacienteCC(ccPaciente);
 		int numDoctor;
-		Cita c = new Cita(Pacientes[numPaciente]);
+		Cita c = new Cita();
 		Sintomas sintomas = Pacientes[numPaciente].getSintomas();
 		if(sintomas.getClass().getName().compareTo("Sint_Sicologico") == 0) {
 			numDoctor = SearchDoctorEspecialidad("Psiquiatra");
