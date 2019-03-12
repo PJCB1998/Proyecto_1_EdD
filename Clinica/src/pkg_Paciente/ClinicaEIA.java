@@ -15,7 +15,7 @@ public class ClinicaEIA {
     }
 
     public void Agregar_Doctor(String nombre, String cedula,int edad, String especialidad) throws ENoDoctor{
-        if (especialidad=="General" || especialidad=="Cirujano" || especialidad=="Psicologo"){
+        if (especialidad=="General" || especialidad=="Cirujano" || especialidad=="Psicologo"){ //OJO con las mayusculas
             doctores= Arrays.copyOf(doctores,doctores.length+1);
             doctores[doctores.length-1]=new Doctor(nombre, cedula,edad,especialidad);
         }else {
@@ -50,6 +50,24 @@ public class ClinicaEIA {
             }else {
                 System.out.println("El tipo de sala: '"+tipo+"' no existe");
             }
+        }
+    }
+    public void Agregar_Cirujano_Urgencias(Doctor doctor, int codigo){
+        boolean VSala=false;
+        for(int i=0;i<salas.length;i++){
+            if(salas[i].getCodigo()==codigo && salas[i] instanceof Urgencias){
+                VSala=true; //Para ver si la sala existe
+                Urgencias sala=(Urgencias)salas[i];
+                try {
+                    sala.agregar_cirujanos(doctor);
+                } catch (ENoDoctor eNoDoctor) {
+                    eNoDoctor.printStackTrace();
+                }
+                salas[i]=sala;
+            }
+        }
+        if(VSala==false){
+            System.out.println("El codigo '"+codigo+"' no pertenece a ninguna sala existente");
         }
     }
 
@@ -96,12 +114,12 @@ public class ClinicaEIA {
     }
     public Sala Buscar_Sala(Paciente paciente, String hora){
         Sala sala_encontrada=null;
-        if(paciente.getSintomas().isMortal()==true){
+        if(paciente.getSintomas().isMortal()){
             Urgencias salaU;
             for(int i=0;i<salas.length;i++){
                 if(salas[i] instanceof Urgencias){
                     salaU=(Urgencias)salas[i];
-                    if (salaU.Cirujanos_Disponibles(hora)==true){
+                    if (salaU.Cirujanos_Disponibles(hora)){
                         sala_encontrada=salaU;
                     }
                 }
@@ -111,7 +129,7 @@ public class ClinicaEIA {
                 Consultorio salaC;
                 if(salas[i] instanceof Consultorio){
                     salaC=(Consultorio)salas[i];
-                    if(salaC.getDoctor().Turno_Disponible(hora)==true){
+                    if(salaC.getDoctor().Turno_Disponible(hora)){
                         sala_encontrada=salaC;
                     }
                 }
@@ -126,6 +144,15 @@ public class ClinicaEIA {
         }else {
             citas=Arrays.copyOf(citas,citas.length+1);
             citas[citas.length-1]=new Cita(sala, paciente,hora,numero);
+            if(citas[citas.length-1].getSala() instanceof Consultorio){
+                if (((Consultorio) citas[citas.length-1].getSala()).getDoctor().getEspecialidad()=="Psicologo"){
+                    citas[citas.length-1].setPrecio(70000);
+                }else if(((Consultorio) citas[citas.length-1].getSala()).getDoctor().getEspecialidad()=="General"){
+                    citas[citas.length-1].setPrecio(50000);
+                }else if(((Consultorio) citas[citas.length-1].getSala()).getDoctor().getEspecialidad()=="Cirujano"){
+                    citas[citas.length-1].setPrecio(80000);
+                }
+            }
         }
 
     }

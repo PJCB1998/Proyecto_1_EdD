@@ -15,7 +15,7 @@ public class Urgencias extends Sala {
         }
     }
 
-    private void agregar_cirujanos(Doctor cirujano) throws ENoDoctor {
+    public void agregar_cirujanos(Doctor cirujano) throws ENoDoctor {
         if (cirujano.getEspecialidad() == "Cirujano") {
             cirujanos = Arrays.copyOf(cirujanos, cirujanos.length + 1);
             cirujanos[cirujanos.length - 1] = cirujano;
