@@ -4,9 +4,8 @@ public abstract class Persona {
     private String nombre;
     private String cedula;
     private int edad;
-    
+
     public Persona(String nombre, String cedula, int edad) {
-		super();
 		this.nombre = nombre;
 		this.cedula = cedula;
 		this.edad = edad;

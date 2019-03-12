@@ -3,20 +3,13 @@ package pkg_Paciente;
 public class Consultorio extends Sala{
 	private Doctor doctor;
 
-	public Consultorio(String piso, String numero, String edificio) {
-		super(piso, numero, edificio);
+	public Consultorio(String piso, String numero, String edificio, int codigo, Doctor doctor) {
+		super(piso, numero, edificio, codigo);
+		this.doctor = doctor;
 	}
 
-	public void Agregar_Doctor(Doctor doctor){
-		this.doctor=doctor;
-	}
-
-	@Override
-	public void calcular_precio() {
-		if(doctor.getEspecialidad()=="Psicologo"){
-			setPrecio(70000);
-		}else if(doctor.getEspecialidad()=="General"){
-			setPrecio(50000);
-		}
+	public Doctor getDoctor() {
+		return doctor;
 	}
 }
+

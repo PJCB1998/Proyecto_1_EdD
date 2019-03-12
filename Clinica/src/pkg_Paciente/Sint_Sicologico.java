@@ -1,26 +1,17 @@
 package pkg_Paciente;
 
-public class Sint_Sicologico {
-    private boolean depresion;
+public class Sint_Sicologico extends Sintomas {
     private boolean ansiedad;
     private boolean paranoia;
-    private boolean hiperactividad;
     private boolean agresividad;
+    private boolean insomnio;
 
-    public Sint_Sicologico(boolean depresion, boolean ansiedad, boolean paranoia, boolean hiperactividad, boolean agresividad) {
-        this.depresion = depresion;
+    public Sint_Sicologico(boolean mortal, boolean ansiedad, boolean paranoia, boolean agresividad, boolean insomnio) {
+        super(mortal);
         this.ansiedad = ansiedad;
         this.paranoia = paranoia;
-        this.hiperactividad = hiperactividad;
         this.agresividad = agresividad;
-    }
-
-    public boolean isDepresion() {
-        return depresion;
-    }
-
-    public void setDepresion(boolean depresion) {
-        this.depresion = depresion;
+        this.insomnio = insomnio;
     }
 
     public boolean isAnsiedad() {
@@ -37,14 +28,6 @@ public class Sint_Sicologico {
 
     public void setParanoia(boolean paranoia) {
         this.paranoia = paranoia;
-    }
-
-    public boolean isHiperactividad() {
-        return hiperactividad;
-    }
-
-    public void setHiperactividad(boolean hiperactividad) {
-        this.hiperactividad = hiperactividad;
     }
 
     public boolean isAgresividad() {
