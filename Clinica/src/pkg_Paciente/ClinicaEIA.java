@@ -19,7 +19,7 @@ public class ClinicaEIA {
             doctores= Arrays.copyOf(doctores,doctores.length+1);
             doctores[doctores.length-1]=new Doctor(nombre, cedula,edad,especialidad);
         }else {
-            throw new ENoDoctor("Ese tipo se especialidad no existe");
+            throw new ENoDoctor("El tipo de especialidad '"+especialidad+"' no existe");
         }
     }
 
@@ -30,7 +30,6 @@ public class ClinicaEIA {
          */
         boolean Codigo_no_utilizado=true;
         for (int i=0; i<salas.length; i++){ //Para ver que no existan salas con el mismo codigo
-
             if (salas[i].getCodigo()==codigo){
                 Codigo_no_utilizado=false;
             }
@@ -42,8 +41,12 @@ public class ClinicaEIA {
                 salas=Arrays.copyOf(salas,salas.length-1);
                 salas[salas.length-1]=new Consultorio(piso,numero,edificio,codigo, doctor);
             }else if (tipo=="Urgencias"){
-                salas=Arrays.copyOf(salas,salas.length-1);
-                salas[salas.length-1]=new Urgencias(piso,numero,edificio,codigo, doctor);
+                if (doctor.getEspecialidad()!="Cirujano"){
+                    System.out.println("El doctor debe ser cirujano para trabajar en una sala de urgencias");
+                }else {
+                    salas=Arrays.copyOf(salas,salas.length-1);
+                    salas[salas.length-1]=new Urgencias(piso,numero,edificio,codigo, doctor);
+                }
             }else {
                 System.out.println("El tipo de sala: '"+tipo+"' no existe");
             }
@@ -55,7 +58,7 @@ public class ClinicaEIA {
     ->Luego el paciente debe ir a un medico general para que le tome los sintomas. (Hay 4 tipos de sintomas que varian
       segun si son sintomas psicologicos o fisicos)
     ->Por ultimo, un paciente puede pedir una cita a la hora que desee y a la que se le asignara una sala con un doctor (o doctores) acordes
-      a los sintomas que tiene
+      a los sintomas que tiene y a la hora deseada
      */
     public void Ingresar_Paciente(String nombre, String cedula, int edad){
         boolean VPaciente=false; // para ver si el paciente existe
@@ -91,6 +94,40 @@ public class ClinicaEIA {
             System.out.println("La cedula N."+cedula+" no pertenece a ningun paciente creado");
         }
     }
+    public Sala Buscar_Sala(Paciente paciente, String hora){
+        Sala sala_encontrada=null;
+        if(paciente.getSintomas().isMortal()==true){
+            Urgencias salaU;
+            for(int i=0;i<salas.length;i++){
+                if(salas[i] instanceof Urgencias){
+                    salaU=(Urgencias)salas[i];
+                    if (salaU.Cirujanos_Disponibles(hora)==true){
+                        sala_encontrada=salaU;
+                    }
+                }
+            }
+        }else{
+            for(int i=0;i<salas.length;i++){
+                Consultorio salaC;
+                if(salas[i] instanceof Consultorio){
+                    salaC=(Consultorio)salas[i];
+                    if(salaC.getDoctor().Turno_Disponible(hora)==true){
+                        sala_encontrada=salaC;
+                    }
+                }
+            }
+        }
+        return sala_encontrada;
+    }
+    public void Asignar_Cita(Paciente paciente, String hora, int numero){
+        Sala sala=Buscar_Sala(paciente,hora);
+        if (sala==null){
+            System.out.println("No hay salas disponibles");
+        }else {
+            citas=Arrays.copyOf(citas,citas.length+1);
+            citas[citas.length-1]=new Cita(sala, paciente,hora,numero);
+        }
 
+    }
 
 }

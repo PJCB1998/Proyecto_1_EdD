@@ -16,6 +16,17 @@ public class Doctor extends Persona {
      	turnos[turnos.length-1].setHora(hora);
 	}
 
+	public boolean Turno_Disponible(String hora) {
+     	boolean turnoD=false;
+		for(int i=0;i<turnos.length;i++){
+			if(turnos[i].getHora()==hora && turnos[i].isDisponible()==true){
+				turnos[i].setDisponible(false);
+				turnoD=true;
+			}
+		}
+		return turnoD;
+	}
+
 	public String getEspecialidad() {
 		return especialidad;
 	}

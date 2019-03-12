@@ -23,7 +23,15 @@ public class Urgencias extends Sala {
             throw new ENoDoctor("El doctor debe ser cirujano");
         }
     }
-
+    public boolean Cirujanos_Disponibles(String hora){
+        boolean turnoD=false;
+        for (int i=0;i<cirujanos.length;i++){
+            if(cirujanos[i].Turno_Disponible(hora)==true){
+                turnoD=true;
+            }
+        }
+        return turnoD;
+    }
     public Doctor[] getCirujanos() {
         return cirujanos;
     }

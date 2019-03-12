@@ -7,5 +7,9 @@ public class Consultorio extends Sala{
 		super(piso, numero, edificio, codigo);
 		this.doctor = doctor;
 	}
+
+	public Doctor getDoctor() {
+		return doctor;
+	}
 }
 
