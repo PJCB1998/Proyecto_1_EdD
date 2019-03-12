@@ -19,3 +19,4 @@ public class Doctor extends Persona {
 		return especialidad;
 	}
 }
+	
