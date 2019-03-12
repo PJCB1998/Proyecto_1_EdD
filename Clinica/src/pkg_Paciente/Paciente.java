@@ -7,20 +7,18 @@ public class Paciente extends Persona {
     private double peso;
     private Sintomas sintomas;
 
-    public Paciente(String nombre, String cedula, int edad,  double pulso, double altura, double peso, Sintomas sintomas) {
+    public Paciente(String nombre, String cedula, int edad,  double pulso, double altura, double peso) {
 		super(nombre, cedula, edad);
 		this.pulso = pulso;
 		this.altura = altura;
 		this.peso = peso;
-		this.sintomas = sintomas;
 	}
 
-	//Creo un constructor vacio por si no quiero agregarle los datos clinicos al paciente.
-	public Paciente(String nombre, String cedula, int edad) {
-		super(nombre, cedula, edad);
-	}
+    public Paciente(String nombre, String cedula, int edad) {
+        super(nombre, cedula, edad);
+    }
 
-	public double getPulso() {
+    public double getPulso() {
         return pulso;
     }
 

@@ -5,22 +5,13 @@ public class Sint_Fisico extends Sintomas {
     private boolean presion_baja;
     private boolean fievre;
     private boolean vomito;
-    private boolean sangrado;
-    private boolean diarrea;
-    private boolean escalofrio;
-    private boolean dolor_muscular;
-    private boolean flema;
 
-    public Sint_Fisico(boolean presion_alta, boolean presion_baja, boolean fievre, boolean vomito, boolean sangrado, boolean diarrea, boolean escalofrio, boolean dolor_muscular, boolean flema) {
+    public Sint_Fisico(boolean mortal, boolean presion_alta, boolean presion_baja, boolean fievre, boolean vomito) {
+        super(mortal);
         this.presion_alta = presion_alta;
         this.presion_baja = presion_baja;
         this.fievre = fievre;
         this.vomito = vomito;
-        this.sangrado = sangrado;
-        this.diarrea = diarrea;
-        this.escalofrio = escalofrio;
-        this.dolor_muscular = dolor_muscular;
-        this.flema = flema;
     }
 
     public boolean isPresion_alta() {
@@ -55,43 +46,4 @@ public class Sint_Fisico extends Sintomas {
         this.vomito = vomito;
     }
 
-    public boolean isSangrado() {
-        return sangrado;
-    }
-
-    public void setSangrado(boolean sangrado) {
-        this.sangrado = sangrado;
-    }
-
-    public boolean isDiarrea() {
-        return diarrea;
-    }
-
-    public void setDiarrea(boolean diarrea) {
-        this.diarrea = diarrea;
-    }
-
-    public boolean isEscalofrio() {
-        return escalofrio;
-    }
-
-    public void setEscalofrio(boolean escalofrio) {
-        this.escalofrio = escalofrio;
-    }
-
-    public boolean isDolor_muscular() {
-        return dolor_muscular;
-    }
-
-    public void setDolor_muscular(boolean dolor_muscular) {
-        this.dolor_muscular = dolor_muscular;
-    }
-
-    public boolean isFlema() {
-        return flema;
-    }
-
-    public void setFlema(boolean flema) {
-        this.flema = flema;
-    }
 }
