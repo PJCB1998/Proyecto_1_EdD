@@ -182,5 +182,14 @@ public class ClinicaEIA {
     		
     		
     }
+public Paciente Buscar_Paciente(String cedula) {
+    	
+    	int x = -1;
+    	
+    	while(++x<pacientes.length && pacientes[x].getCedula().compareTo(cedula)!=0);
+    		return (x<pacientes.length ? pacientes[x] : null);
+    		
+    		
+    }
 
 }

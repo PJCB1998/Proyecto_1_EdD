@@ -14,26 +14,20 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JTextField;
 
-public class Citas {
+public class AsignarCta {
 
 	private JFrame frame;
-	private JTextField txtNombre;
-	private static JTextField txtCcPaciente;
-	private JTextField txtEdad;
-	
-
-	public static JTextField getTxtCcPaciente() {
-		return txtCcPaciente;
-	}
+	private JTextField txtHora;
+	public int contador = 1; 
 
 	/**
 	 * Launch the application.
 	 */
-	public static void openCitas() {
+	public static void openAC(){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Citas window = new Citas();
+					AsignarCta window = new AsignarCta();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +39,7 @@ public class Citas {
 	/**
 	 * Create the application.
 	 */
-	public Citas() {
+	public AsignarCta() {
 		initialize();
 	}
 
@@ -59,7 +53,6 @@ public class Citas {
 		
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
-		panel.setLayout(null);
 		JButton btnBack = new JButton("ATRAS");
 		btnBack.setHorizontalAlignment(SwingConstants.LEFT);
 		btnBack.setBackground(Color.WHITE);
@@ -70,52 +63,29 @@ public class Citas {
 				frame.setVisible(false);
 			}
 		});
-		btnBack.setBounds(6, 240, 100, 32);
+		panel.setLayout(null);
+		btnBack.setBounds(16, 240, 100, 32);
 		panel.add(btnBack);
 		
-		JButton btnListo = new JButton("LISTO");
-		btnListo.addActionListener(new ActionListener() {
+		JButton btnAsignarCita = new JButton("ASIGNAR CITA");
+		btnAsignarCita.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
-					try {
-						
-						Welcome.clinica1.Ingresar_Paciente(txtNombre.getText(), txtCcPaciente.getText(), Integer.parseInt(txtEdad.getText()));
-						System.out.println("Bien");
-						frame.setVisible(false);
-						IngSintomas.openIS();
-					} catch (NumberFormatException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					
-					
 				
-				
-			
+				Paciente p1 = Welcome.clinica1.Buscar_Paciente(Citas.getTxtCcPaciente().getText());
+				Welcome.clinica1.Asignar_Cita(p1, txtHora.getText(), contador );
+				contador=contador+1;
+				frame.setVisible(false);
+				Welcome.main(null);
 				
 			}
 		});
-		btnListo.setBackground(Color.WHITE);
-		btnListo.setBounds(344, 242, 100, 32);
-		panel.add(btnListo);
+		btnAsignarCita.setBounds(166, 174, 117, 29);
+		panel.add(btnAsignarCita);
 		
-		txtNombre = new JTextField();
-		txtNombre.setText("NOMBRE");
-		txtNombre.setBounds(160, 50, 130, 26);
-		panel.add(txtNombre);
-		txtNombre.setColumns(10);
-		
-		txtCcPaciente = new JTextField();
-		txtCcPaciente.setText("CC PACIENTE");
-		txtCcPaciente.setColumns(10);
-		txtCcPaciente.setBounds(160, 126, 130, 26);
-		panel.add(txtCcPaciente);
-		
-		txtEdad = new JTextField();
-		txtEdad.setText("EDAD");
-		txtEdad.setBounds(160, 202, 130, 26);
-		panel.add(txtEdad);
-		txtEdad.setColumns(10);
+		txtHora = new JTextField();
+		txtHora.setText("HORA");
+		txtHora.setBounds(160, 74, 130, 26);
+		panel.add(txtHora);
+		txtHora.setColumns(10);
 	}
-
 }

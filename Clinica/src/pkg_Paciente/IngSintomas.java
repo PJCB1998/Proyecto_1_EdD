@@ -13,27 +13,24 @@ import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JSplitPane;
+import javax.swing.JCheckBox;
 
-public class Citas {
+public class IngSintomas {
 
 	private JFrame frame;
-	private JTextField txtNombre;
-	private static JTextField txtCcPaciente;
-	private JTextField txtEdad;
-	
-
-	public static JTextField getTxtCcPaciente() {
-		return txtCcPaciente;
-	}
+	private JButton btnFisicos;
+	private JButton btnPsicologicos;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void openCitas() {
+	public static void openIS(){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Citas window = new Citas();
+					IngSintomas window = new IngSintomas();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +42,7 @@ public class Citas {
 	/**
 	 * Create the application.
 	 */
-	public Citas() {
+	public IngSintomas() {
 		initialize();
 	}
 
@@ -59,63 +56,41 @@ public class Citas {
 		
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
-		panel.setLayout(null);
+		
 		JButton btnBack = new JButton("ATRAS");
 		btnBack.setHorizontalAlignment(SwingConstants.LEFT);
 		btnBack.setBackground(Color.WHITE);
 		btnBack.setIcon(new ImageIcon(Admin.class.getResource("/pkg_Paciente/back.png")));
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Welcome.main(null);
+				Citas.openCitas();
 				frame.setVisible(false);
 			}
 		});
+		panel.setLayout(null);
 		btnBack.setBounds(6, 240, 100, 32);
 		panel.add(btnBack);
+	
 		
-		JButton btnListo = new JButton("LISTO");
-		btnListo.addActionListener(new ActionListener() {
+		btnFisicos = new JButton("FISICOS");
+		btnFisicos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
-					try {
-						
-						Welcome.clinica1.Ingresar_Paciente(txtNombre.getText(), txtCcPaciente.getText(), Integer.parseInt(txtEdad.getText()));
-						System.out.println("Bien");
-						frame.setVisible(false);
-						IngSintomas.openIS();
-					} catch (NumberFormatException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					
-					
-				
-				
-			
-				
+				frame.setVisible(false);
+				FISI.openFi();
 			}
 		});
-		btnListo.setBackground(Color.WHITE);
-		btnListo.setBounds(344, 242, 100, 32);
-		panel.add(btnListo);
+		btnFisicos.setBounds(72, 124, 117, 29);
+		panel.add(btnFisicos);
 		
-		txtNombre = new JTextField();
-		txtNombre.setText("NOMBRE");
-		txtNombre.setBounds(160, 50, 130, 26);
-		panel.add(txtNombre);
-		txtNombre.setColumns(10);
-		
-		txtCcPaciente = new JTextField();
-		txtCcPaciente.setText("CC PACIENTE");
-		txtCcPaciente.setColumns(10);
-		txtCcPaciente.setBounds(160, 126, 130, 26);
-		panel.add(txtCcPaciente);
-		
-		txtEdad = new JTextField();
-		txtEdad.setText("EDAD");
-		txtEdad.setBounds(160, 202, 130, 26);
-		panel.add(txtEdad);
-		txtEdad.setColumns(10);
+		btnPsicologicos = new JButton("PSICOLOGICOS");
+		btnPsicologicos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				frame.setVisible(false);
+				PSICO.openPsi();
+			}
+		});
+		btnPsicologicos.setBounds(261, 124, 117, 29);
+		panel.add(btnPsicologicos);
 	}
-
 }
