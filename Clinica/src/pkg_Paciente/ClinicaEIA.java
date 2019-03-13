@@ -4,20 +4,32 @@ import java.util.Arrays;
 
 public class ClinicaEIA {
 
-    private String nombre;
+  
+	private String nombre;
     private Sala[] salas=new Sala[0];
     private Cita[] citas=new Cita[0];
-    private Doctor[] doctores=new Doctor[0];
+    private Doctor[] doctores=new Doctor[1];
     private Paciente[] pacientes=new Paciente[0];
 
     public ClinicaEIA() {
         this.nombre="Clinica EIA";
     }
+    
+    public Doctor[] getDoctores() {
+  		return doctores;
+  	}
 
     public void Agregar_Doctor(String nombre, String cedula,int edad, String especialidad) throws ENoDoctor{
-        if (especialidad=="General" || especialidad=="Cirujano" || especialidad=="Psicologo"){ //OJO con las mayusculas
-            doctores= Arrays.copyOf(doctores,doctores.length+1);
-            doctores[doctores.length-1]=new Doctor(nombre, cedula,edad,especialidad);
+        if (especialidad.compareTo("General")==0| especialidad.compareTo("Cirujano")==0|| especialidad.compareTo("Psicologo")==0){ //OJO con las mayusculas
+            
+        	if(doctores[0]==null) {
+        		doctores[0]=new Doctor(nombre, cedula,edad,especialidad);
+        		
+        	}
+        	else {
+        		doctores= Arrays.copyOf(doctores,doctores.length+1);
+        		doctores[doctores.length-1]=new Doctor(nombre, cedula,edad,especialidad);
+        	}
         }else {
             throw new ENoDoctor("El tipo de especialidad '"+especialidad+"' no existe");
         }
@@ -37,14 +49,14 @@ public class ClinicaEIA {
         if (Codigo_no_utilizado==false){
             System.out.println("El codigo: '"+codigo+"' ya fue utilizado"); //Ojo a las mayusculas
         }else {
-            if(tipo=="Consultorio"){
-                salas=Arrays.copyOf(salas,salas.length-1);
+            if(tipo.compareTo("Consultorio")==0){
+                salas=Arrays.copyOf(salas,salas.length+1);
                 salas[salas.length-1]=new Consultorio(piso,numero,edificio,codigo, doctor);
-            }else if (tipo=="Urgencias"){
+            }else if (tipo.compareTo("Urgencias")==0){
                 if (doctor.getEspecialidad()!="Cirujano"){
                     System.out.println("El doctor debe ser cirujano para trabajar en una sala de urgencias");
                 }else {
-                    salas=Arrays.copyOf(salas,salas.length-1);
+                    salas=Arrays.copyOf(salas,salas.length+1);
                     salas[salas.length-1]=new Urgencias(piso,numero,edificio,codigo, doctor);
                 }
             }else {
@@ -52,7 +64,11 @@ public class ClinicaEIA {
             }
         }
     }
-    public void Agregar_Cirujano_Urgencias(Doctor doctor, int codigo){
+    public Sala[] getSalas() {
+		return salas;
+	}
+
+	public void Agregar_Cirujano_Urgencias(Doctor doctor, int codigo){
         boolean VSala=false;
         for(int i=0;i<salas.length;i++){
             if(salas[i].getCodigo()==codigo && salas[i] instanceof Urgencias){
@@ -155,6 +171,16 @@ public class ClinicaEIA {
             }
         }
 
+    }
+    
+    public Doctor Buscar_Doctor(String cedula) {
+    	
+    	int x = -1;
+    	
+    	while(++x<doctores.length && doctores[x].getCedula().compareTo(cedula)!=0);
+    		return (x<doctores.length ? doctores[x] : null);
+    		
+    		
     }
 
 }
