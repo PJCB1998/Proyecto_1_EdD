@@ -20,7 +20,7 @@ public class ClinicaEIA {
   	}
 
     public void Agregar_Doctor(String nombre, String cedula,int edad, String especialidad) throws ENoDoctor{
-        if (especialidad.compareTo("General")==0| especialidad.compareTo("Cirujano")==0|| especialidad.compareTo("Psicologo")==0){ //OJO con las mayusculas
+        if (especialidad.compareTo("General")==0|| especialidad.compareTo("Cirujano")==0|| especialidad.compareTo("Psicologo")==0){ //OJO con las mayusculas
             
         	if(doctores[0]==null) {
         		doctores[0]=new Doctor(nombre, cedula,edad,especialidad);
@@ -53,7 +53,7 @@ public class ClinicaEIA {
                 salas=Arrays.copyOf(salas,salas.length+1);
                 salas[salas.length-1]=new Consultorio(piso,numero,edificio,codigo, doctor);
             }else if (tipo.compareTo("Urgencias")==0){
-                if (doctor.getEspecialidad()!="Cirujano"){
+                if (doctor.getEspecialidad().compareTo("Cirujano")!=0){
                     System.out.println("El doctor debe ser cirujano para trabajar en una sala de urgencias");
                 }else {
                     salas=Arrays.copyOf(salas,salas.length+1);
@@ -71,7 +71,7 @@ public class ClinicaEIA {
 	public void Agregar_Cirujano_Urgencias(Doctor doctor, int codigo){
         boolean VSala=false;
         for(int i=0;i<salas.length;i++){
-            if(salas[i].getCodigo()==codigo && salas[i] instanceof Urgencias){
+            if(salas[i].getCodigo()==codigo && salas[i].getClass().getSimpleName().compareTo("Urgencias")==0){
                 VSala=true; //Para ver si la sala existe
                 Urgencias sala=(Urgencias)salas[i];
                 try {
@@ -97,7 +97,7 @@ public class ClinicaEIA {
     public void Ingresar_Paciente(String nombre, String cedula, int edad){
         boolean VPaciente=false; // para ver si el paciente existe
         for (int i=0;i<pacientes.length;i++){
-            if(pacientes[i].getCedula()==cedula){
+            if(pacientes[i].getCedula().compareTo("cedula")==0){
                 VPaciente=true;
             }
         }
@@ -111,13 +111,13 @@ public class ClinicaEIA {
     public void Tomar_Sintomas(String cedula, boolean mortal, String tipo, boolean sintoma1, boolean sintoma2, boolean sintoma3, boolean sintoma4){
         boolean VPaciente=false; //para buscar el paciente por la cc
         for (int i=0;i<pacientes.length;i++){
-            if (pacientes[i].getCedula()==cedula){
+            if (pacientes[i].getCedula().compareTo(cedula)==0){
                 Paciente paciente;
                 VPaciente=true;
                 paciente=pacientes[i];
-                if (tipo=="Fisicos"){
+                if (tipo.compareTo("Fisicos")==0){
                     paciente.setSintomas(new Sint_Fisico(mortal,sintoma1,sintoma2,sintoma3,sintoma4));
-                }else if(tipo=="Psicologicos"){
+                }else if(tipo.compareTo("Psicologicos")==0){
                     paciente.setSintomas(new Sint_Sicologico(mortal,sintoma1,sintoma2,sintoma3,sintoma4));
                 }else {
                     System.out.println("El tipo de sintoma '"+tipo+"' no existe");
@@ -133,9 +133,9 @@ public class ClinicaEIA {
         if(paciente.getSintomas().isMortal()){
             Urgencias salaU;
             for(int i=0;i<salas.length;i++){
-                if(salas[i] instanceof Urgencias){
+                if(salas[i].getClass().getSimpleName().compareTo("Urgencias")==0){
                     salaU=(Urgencias)salas[i];
-                    if (salaU.Cirujanos_Disponibles(hora)){
+                    if (true){
                         sala_encontrada=salaU;
                     }
                 }
@@ -143,9 +143,9 @@ public class ClinicaEIA {
         }else{
             for(int i=0;i<salas.length;i++){
                 Consultorio salaC;
-                if(salas[i] instanceof Consultorio){
+                if(salas[i].getClass().getSimpleName().compareTo("Consultorio")==0){
                     salaC=(Consultorio)salas[i];
-                    if(salaC.getDoctor().Turno_Disponible(hora)){
+                    if(true){
                         sala_encontrada=salaC;
                     }
                 }
@@ -160,12 +160,12 @@ public class ClinicaEIA {
         }else {
             citas=Arrays.copyOf(citas,citas.length+1);
             citas[citas.length-1]=new Cita(sala, paciente,hora,numero);
-            if(citas[citas.length-1].getSala() instanceof Consultorio){
-                if (((Consultorio) citas[citas.length-1].getSala()).getDoctor().getEspecialidad()=="Psicologo"){
+            if(citas[citas.length-1].getSala().getClass().getSimpleName().compareTo("Consultorio")==0){
+                if (((Consultorio) citas[citas.length-1].getSala()).getDoctor().getEspecialidad().compareTo("Psicologo")==0){
                     citas[citas.length-1].setPrecio(70000);
-                }else if(((Consultorio) citas[citas.length-1].getSala()).getDoctor().getEspecialidad()=="General"){
+                }else if(((Consultorio) citas[citas.length-1].getSala()).getDoctor().getEspecialidad().compareTo("General")==0){
                     citas[citas.length-1].setPrecio(50000);
-                }else if(((Consultorio) citas[citas.length-1].getSala()).getDoctor().getEspecialidad()=="Cirujano"){
+                }else if(((Consultorio) citas[citas.length-1].getSala()).getDoctor().getEspecialidad().compareTo("Cirujano")==0){
                     citas[citas.length-1].setPrecio(80000);
                 }
             }

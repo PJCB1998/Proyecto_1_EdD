@@ -74,7 +74,7 @@ public class FISI {
 			public void actionPerformed(ActionEvent e) {
 			
 			
-			Welcome.clinica1.Tomar_Sintomas(Citas.getTxtCcPaciente().getText(), chckbxMortal.isSelected(), "Fisico", chckbxS1.isSelected(), chckbxS2.isSelected(), chckbxS3.isSelected(), chckbxS4.isSelected());
+			Welcome.clinica1.Tomar_Sintomas(Citas.getTxtCcPaciente().getText(), chckbxMortal.isSelected(), "Fisicos", chckbxS1.isSelected(), chckbxS2.isSelected(), chckbxS3.isSelected(), chckbxS4.isSelected());
 			frame.setVisible(false);
 			AsignarCta.openAC();
 			System.out.println("Bien");

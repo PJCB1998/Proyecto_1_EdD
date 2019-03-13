@@ -109,7 +109,7 @@ public class AgregarDoctor {
 						Welcome.clinica1.Agregar_Doctor(txtNombreDelDoctor.getText(),txtCedula.getText(),Integer.parseInt(txtEdad.getText()),txtEspecialidad.getText());
 						Admin.openAdim();
 						frame.setVisible(false);
-						System.out.println(Welcome.clinica1.getDoctores()[0].getNombre());
+						System.out.println(Welcome.clinica1.getDoctores()[0].getEspecialidad());
 					} catch (NumberFormatException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
